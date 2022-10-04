@@ -5,7 +5,9 @@ function App() {
     <div className="App">
       <header></header>
       <main>
-        <Table />
+        <section>
+          <Table />
+        </section>
       </main>
       <footer></footer>
     </div>
