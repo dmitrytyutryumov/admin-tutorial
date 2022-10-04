@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+documentation
+package-lock.json
+yarn.lock
+package.json
+static

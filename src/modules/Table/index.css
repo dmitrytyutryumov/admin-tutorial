@@ -14,7 +14,7 @@
 .table__cell {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   gap: 0.3rem;
 
@@ -26,7 +26,6 @@
   font-weight: 600;
   cursor: pointer;
 }
-
 
 .table__cell > img {
   flex: 0.3;

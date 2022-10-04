@@ -1,5 +1,4 @@
-import logo from "./logo.svg";
-import { Table } from "./modules/Table";
+import { Table } from './modules/Table'
 
 function App() {
   return (
@@ -10,7 +9,7 @@ function App() {
       </main>
       <footer></footer>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

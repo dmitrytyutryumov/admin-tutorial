@@ -1,38 +1,37 @@
-import React from "react";
-import { getColumns, getUsers } from "./constants";
-import "./index.css";
-import { normalizeTable } from "./utils";
+import React from 'react'
+import CountryTableCell from './components/CountryTableCell'
+import TableCell from './components/TableCell'
+import { getColumns, getUsers } from './constants'
+import './index.css'
+import { normalizeTable } from './utils'
 
 export function Table() {
-  const [table, setTable] = React.useState([]);
+  const [table, setTable] = React.useState([])
 
   React.useEffect(() => {
-    setTable(normalizeTable(getColumns(), getUsers()));
-  }, []);
+    setTable(normalizeTable(getColumns(), getUsers()))
+  }, [])
 
   return (
     <ul className="table">
       {table.map((column) => {
         return (
-          <div className="table__column">
+          <div className="table__column" key={column}>
             {column.map((cell, idx) => {
-              if (column[0].toLowerCase() === "country" && idx !== 0) {
+              if (column[0].toLowerCase() === 'country' && idx !== 0) {
                 return (
-                  <div className="table__cell" key={idx}>
-                    <img src={cell[0]} alt={`${cell[1]} icon`} />
-                    <div>{cell[1]}</div>
-                  </div>
-                );
+                  <CountryTableCell
+                    countryName={cell[1]}
+                    icon={cell[0]}
+                    key={idx}
+                  />
+                )
               }
-              return (
-                <div className="table__cell" key={idx}>
-                  {cell}
-                </div>
-              );
+              return <TableCell value={cell} key={idx} />
             })}
           </div>
-        );
+        )
       })}
     </ul>
-  );
+  )
 }
