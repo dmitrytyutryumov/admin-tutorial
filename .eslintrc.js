@@ -15,7 +15,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
-  ignorePatterns: ['static', 'package.json', 'package-lock.json'],
+  ignorePatterns: ['static', 'package.json', 'package-lock.json', '.husky'],
   rules: {
     'require-jsdoc': 'off',
     'react/jsx-uses-react': 'off',
