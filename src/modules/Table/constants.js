@@ -118,27 +118,27 @@ const getUsers = (usersNumber = 20) => {
 }
 
 const getColumns = () => {
-  return [
-    'Name',
-    'Language',
-    'Country',
-    'Game Name',
-    'Bought',
-    'Bank Balance',
-    'Rating',
-    'Total Winnings',
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
+  return {
+    Name: 'name',
+    Language: 'language',
+    Country: 'country',
+    'Game Name': 'gameName',
+    Bought: 'bought',
+    'Bank Balance': 'bankBalance',
+    Rating: 'rating',
+    'Total Winnings': 'totalWinnings',
+    Jan: 'jan',
+    Feb: 'feb',
+    Mar: 'mar',
+    Apr: 'apr',
+    May: 'may',
+    Jun: 'jun',
+    Jul: 'jul',
+    Aug: 'aug',
+    Sep: 'sep',
+    Oct: 'oct',
+    Nov: 'nov',
+    Dec: 'dec',
+  }
 }
-export { chance, getUsers, getColumns }
+export { getUsers, getColumns }
