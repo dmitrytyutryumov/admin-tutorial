@@ -7,6 +7,12 @@ import { getColumns, getUsers } from './constants'
 import './index.css'
 import { normalizeTable, sortUsers } from './utils'
 
+const cells = {
+  country: CountryTableCell,
+  rating: RatingTableCell,
+  bought: CheckTableCell,
+}
+
 export function Table() {
   const [columns, setColumns] = React.useState([])
   const [users, setUsers] = React.useState([])
@@ -39,22 +45,9 @@ export function Table() {
           return (
             <div className="table__column" key={column}>
               {column.map((cell, idx) => {
-                if (idx !== 0) {
-                  if (column[0].toLowerCase() === 'country') {
-                    return (
-                      <CountryTableCell
-                        countryName={cell[1]}
-                        icon={cell[0]}
-                        key={idx}
-                      />
-                    )
-                  }
-                  if (column[0].toLowerCase() == 'rating') {
-                    return <RatingTableCell value={cell} key={idx} />
-                  }
-                  if (column[0].toLowerCase() == 'bought') {
-                    return <CheckTableCell value={cell} key={idx} />
-                  }
+                const Cell = cells[column[0].toLowerCase()]
+                if (idx !== 0 && Cell) {
+                  return <Cell value={cell} key={idx} />
                 }
                 return (
                   <TableCell
