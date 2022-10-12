@@ -56,11 +56,10 @@ export function Table() {
 
   return (
     <InfiniteScroll
-      dataLength={users.length} // This is important field to render the next data
+      dataLength={table.length > 0 ? table[0].length : 0} // This is important field to render the next data
       next={fetchUsers}
       hasMore={hasMore}
       loader={<LoadingIcon />}
-      scrollThreshold="50%"
     >
       <ul className="table">
         {table.map((column) => {
