@@ -1,0 +1,6 @@
+[
+  {
+    "id": "purchases",
+    "routes": ["get-purchases:success", "get-purchases-meta:success"]
+  }
+]

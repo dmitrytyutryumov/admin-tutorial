@@ -1,4 +1,4 @@
-import Chance from 'chance'
+const Chance = require('chance')
 const chance = new Chance()
 
 chance.mixin({
@@ -20,57 +20,57 @@ chance.mixin({
     {
       country: 'Spanish',
       language: 'Spanish',
-      icon: require('../../static/images/se.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/se.png',
     },
     {
       country: 'France',
       language: 'French',
-      icon: require('../../static/images/fr.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/fr.png',
     },
     {
       country: 'Greece',
       language: 'Greek',
-      icon: require('../../static/images/gr.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/gr.png',
     },
     {
       country: 'Ireland',
       language: 'English',
-      icon: require('../../static/images/ie.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/ie.png',
     },
     {
       country: 'Iceland',
       language: 'Icelandic',
-      icon: require('../../static/images/is.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/is.png',
     },
     {
       country: 'Italy',
       language: 'Italian',
-      icon: require('../../static/images/it.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/it.png',
     },
     {
       country: 'Luxemburg',
       language: 'French',
-      icon: require('../../static/images/lu.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/lu.png',
     },
     {
       country: 'Malta',
       language: 'Maltese',
-      icon: require('../../static/images/mt.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/mt.png',
     },
     {
       country: 'Portugal',
       language: 'Portuguese',
-      icon: require('../../static/images/pt.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/pt.png',
     },
     {
       country: 'Sweden',
       language: 'Swedish',
-      icon: require('../../static/images/se.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/se.png',
     },
     {
       country: 'Uruguay',
       language: 'Spanish',
-      icon: require('../../static/images/uy.png'),
+      icon: 'https://flags.fmcdn.net/data/flags/mini/uy.png',
     },
   ],
 })
@@ -141,4 +141,36 @@ const getColumns = () => {
     Dec: 'dec',
   }
 }
-export { getUsers, getColumns }
+
+module.exports = [
+  {
+    id: 'get-purchases', // route id
+    url: '/api/purchases', // url in express format
+    method: ['GET'], // HTTP methods
+    variants: [
+      {
+        id: 'success', // id of the variant
+        type: 'json', // variant type
+        options: {
+          status: 200,
+          body: getUsers(),
+        },
+      },
+    ],
+  },
+  {
+    id: 'get-purchases-meta', // route id
+    url: '/api/purchases/meta', // url in express format
+    method: ['GET'], // HTTP methods
+    variants: [
+      {
+        id: 'success', // id of the variant
+        type: 'json', // variant type
+        options: {
+          status: 200,
+          body: getColumns(),
+        },
+      },
+    ],
+  },
+]

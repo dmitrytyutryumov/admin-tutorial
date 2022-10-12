@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const normalizeTable = (columns, users) => {
   const table = columns.map((column) => [column])
 
@@ -11,9 +13,9 @@ export const normalizeTable = (columns, users) => {
 }
 
 export const sortUsers = ({ users, field, order }) => {
-  const _users = [...users].sort((user, user1) => {
+  return [...users].sort((user, nextUser) => {
     let value = user[[field]]
-    let nextValue = user1[[field]]
+    let nextValue = nextUser[[field]]
 
     if (value instanceof Array) {
       value = value[1]
@@ -35,7 +37,25 @@ export const sortUsers = ({ users, field, order }) => {
     }
     return (value > nextValue ? 1 : -1) * order
   })
-  return _users
 }
 
 export const parseCurrencyField = (str) => parseFloat(str.replace('$', ''))
+
+export const getUsers = async () => {
+  try {
+    const response = await axios.get('/purchases')
+    return response.data
+  } catch {
+    return []
+  }
+}
+
+export const getColumns = async () => {
+  try {
+    const response = await axios.get('/purchases/meta')
+    console.log('col', response.data)
+    return response.data
+  } catch {
+    return []
+  }
+}

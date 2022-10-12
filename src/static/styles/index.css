@@ -6,6 +6,11 @@ html, body, #root, .App {
   height: 100%;
 }
 
+.app-container {
+  padding-inline: clamp(3rem, 2vw + 3rem, 30vw);
+}
+
+
 .header {
   margin-bottom: 1rem;
   padding: 1rem;
@@ -22,4 +27,24 @@ img {
   width: 100%;
   height: auto;
   object-fit: contain;
+}
+
+
+.btn {
+  padding: .3rem 1rem;
+
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: white;
+
+  background-color: rgb(76, 76, 180);
+  border-radius: 0.3rem;
+}
+
+.text-input {
+  font-size: 1.3rem;
+  font-weight: 500;
+
+  padding-block: .3rem;
+  border-radius: 0.3rem;
 }

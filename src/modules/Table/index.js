@@ -1,17 +1,7 @@
 import React from 'react'
-import CheckTableCell from './components/CheckTableCell'
-import CountryTableCell from './components/CountryTableCell'
-import RatingTableCell from './components/RatingTableCell'
-import TableCell from './components/TableCell'
-import { getColumns, getUsers } from './constants'
+import { getColumnCells } from './components'
 import './index.css'
-import { normalizeTable, sortUsers } from './utils'
-
-const cells = {
-  country: CountryTableCell,
-  rating: RatingTableCell,
-  bought: CheckTableCell,
-}
+import { getColumns, getUsers, normalizeTable, sortUsers } from './utils'
 
 export function Table() {
   const [columns, setColumns] = React.useState([])
@@ -32,36 +22,29 @@ export function Table() {
     setTable(normalizeTable(Object.keys(columns), _users))
   }
 
+  console.log(columns)
+
+  const buildTable = React.useCallback(async () => {
+    const newColumns = await getColumns()
+    const newUsers = await getUsers()
+    setColumns(newColumns)
+    setUsers(newUsers)
+    setTable(normalizeTable(Object.keys(newColumns), newUsers))
+  }, [])
+
   React.useEffect(() => {
-    setColumns(getColumns())
-    setUsers(getUsers())
-    setTable(normalizeTable(Object.keys(columns), users))
+    buildTable()
   }, [columns.length])
 
   return (
-    <section className="table-section">
-      <ul className="table">
-        {table.map((column) => {
-          return (
-            <div className="table__column" key={column}>
-              {column.map((cell, idx) => {
-                const Cell = cells[column[0].toLowerCase()]
-                if (idx !== 0 && Cell) {
-                  return <Cell value={cell} key={idx} />
-                }
-                return (
-                  <TableCell
-                    value={cell}
-                    key={idx}
-                    data-target={cell}
-                    onClick={idx === 0 ? onClick : null}
-                  />
-                )
-              })}
-            </div>
-          )
-        })}
-      </ul>
-    </section>
+    <ul className="table">
+      {table.map((column) => {
+        return (
+          <div className="table__column" key={column}>
+            {getColumnCells(column, onClick)}
+          </div>
+        )
+      })}
+    </ul>
   )
 }

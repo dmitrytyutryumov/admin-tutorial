@@ -5,10 +5,12 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.1.2",
     "chance": "^1.1.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "redux-saga": "^1.2.1",
     "sass": "^1.55.0",
     "sass-loader": "^13.0.2",
     "web-vitals": "^2.1.4"
@@ -22,7 +24,8 @@
     "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\"",
     "start-wp": "webpack serve",
     "build-wp": "webpack",
-    "test-wp": "react-scripts test"
+    "test-wp": "react-scripts test",
+    "mock-server": "mocks-server"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@mocks-server/main": "^4.0.0",
     "@testing-library/react": "^13.4.0",
     "clean-webpack-plugin": "^4.0.0",
     "eslint": "^8.24.0",
