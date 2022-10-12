@@ -8,11 +8,11 @@ export const normalizeTable = (columns, users) => {
       table[idx].push(item[1])
     })
   })
-
   return table
 }
 
 export const sortUsers = ({ users, field, order }) => {
+  console.log(users, field, order)
   return [...users].sort((user, nextUser) => {
     let value = user[[field]]
     let nextValue = nextUser[[field]]
@@ -53,7 +53,6 @@ export const getUsers = async () => {
 export const getColumns = async () => {
   try {
     const response = await axios.get('/purchases/meta')
-    console.log('col', response.data)
     return response.data
   } catch {
     return []

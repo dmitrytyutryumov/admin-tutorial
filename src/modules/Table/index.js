@@ -2,12 +2,16 @@ import React from 'react'
 import { getColumnCells } from './components'
 import './index.css'
 import { getColumns, getUsers, normalizeTable, sortUsers } from './utils'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { ReactComponent as LoadingIcon } from '../../static/images/loading.svg'
 
 export function Table() {
   const [columns, setColumns] = React.useState([])
   const [users, setUsers] = React.useState([])
   const [table, setTable] = React.useState([])
   const [order, setOrder] = React.useState(-1)
+  const [sortField, setSortField] = React.useState(null)
+  const [hasMore, setHasMore] = React.useState(false)
 
   const onClick = (event) => {
     const newOrder = order * -1
@@ -18,33 +22,55 @@ export function Table() {
       order: newOrder,
     })
     setOrder(newOrder)
+    setSortField(field)
     setUsers(_users)
     setTable(normalizeTable(Object.keys(columns), _users))
   }
 
-  console.log(columns)
-
-  const buildTable = React.useCallback(async () => {
-    const newColumns = await getColumns()
-    const newUsers = await getUsers()
-    setColumns(newColumns)
+  const fetchUsers = React.useCallback(async () => {
+    setHasMore(false)
+    let newUsers = [...users, ...(await getUsers())]
+    if (sortField !== null) {
+      console.log(newUsers, sortField, order)
+      newUsers = sortUsers({
+        users: newUsers,
+        field: columns[[sortField]],
+        order,
+      })
+    }
     setUsers(newUsers)
-    setTable(normalizeTable(Object.keys(newColumns), newUsers))
+  })
+
+  React.useEffect(() => {
+    async function fetchData() {
+      setColumns(await getColumns())
+      setUsers(await getUsers())
+    }
+    fetchData()
   }, [])
 
   React.useEffect(() => {
-    buildTable()
-  }, [columns.length])
+    setTable(normalizeTable(Object.keys(columns), users))
+    setHasMore(true)
+  }, [users.length])
 
   return (
-    <ul className="table">
-      {table.map((column) => {
-        return (
-          <div className="table__column" key={column}>
-            {getColumnCells(column, onClick)}
-          </div>
-        )
-      })}
-    </ul>
+    <InfiniteScroll
+      dataLength={users.length} // This is important field to render the next data
+      next={fetchUsers}
+      hasMore={hasMore}
+      loader={<LoadingIcon />}
+      scrollThreshold="50%"
+    >
+      <ul className="table">
+        {table.map((column) => {
+          return (
+            <div className="table__column" key={column}>
+              {getColumnCells(column, onClick)}
+            </div>
+          )
+        })}
+      </ul>
+    </InfiniteScroll>
   )
 }

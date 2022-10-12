@@ -48,3 +48,13 @@ img {
   padding-block: .3rem;
   border-radius: 0.3rem;
 }
+
+#loading-icon {
+  position: absolute;
+  left: 50%;
+  animation: rotate 1s linear infinite
+}
+
+@keyframes rotate {
+  100%   {transform: rotate(360deg)}
+}
