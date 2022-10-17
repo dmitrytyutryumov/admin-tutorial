@@ -9,7 +9,7 @@ const CELLS = {
   bought: CheckTableCell,
 }
 
-export const getColumnCells = (column, onClick) => {
+export const getColumnCells = ({ column, sortHandler }) => {
   return column.map((cell, idx) => {
     const Cell = CELLS[column[0].toLowerCase()]
 
@@ -21,7 +21,7 @@ export const getColumnCells = (column, onClick) => {
         value={cell}
         key={idx}
         data-target={cell}
-        onClick={idx === 0 ? onClick : null}
+        onClick={idx === 0 ? sortHandler : null}
       />
     )
   })

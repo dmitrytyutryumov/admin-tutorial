@@ -4,7 +4,7 @@ import './index.css'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { ReactComponent as LoadingIcon } from '../../static/images/loading.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPuschases } from '../../store/selectors'
+import { getPuschases, getTable } from '../../store/selectors'
 import {
   fetchTableData,
   addPurchases,
@@ -13,29 +13,24 @@ import {
 
 export function Table() {
   const dispatch = useDispatch()
-  const { table, purchases, loading: isLoading } = useSelector(getPuschases)
+  const table = useSelector(getTable)
+  const { purchases, loading: isLoading } = useSelector(getPuschases)
 
   const updateUsers = () => {
     dispatch(addPurchases())
-    dispatch(purchasesActions.normalize())
   }
 
-  const onClick = (event) => {
-    dispatch(purchasesActions.sort({ sortField: event.target.dataset.target }))
-    dispatch(purchasesActions.normalize())
+  const sortHandler = (event) => {
+    dispatch(purchasesActions.sort(event.target.dataset.target))
   }
 
   React.useEffect(() => {
     dispatch(fetchTableData())
   }, [])
 
-  React.useEffect(() => {
-    dispatch(purchasesActions.normalize())
-  }, [purchases.length])
-
   return (
     <InfiniteScroll
-      dataLength={0} // This is important field to render the next data
+      dataLength={purchases.length} // This is important field to render the next data
       next={updateUsers}
       hasMore={true}
       loader={<LoadingIcon />}
@@ -45,7 +40,7 @@ export function Table() {
         {table.map((column) => {
           return (
             <div className="table__column" key={column}>
-              {getColumnCells(column, onClick)}
+              {getColumnCells({ column, sortHandler })}
             </div>
           )
         })}

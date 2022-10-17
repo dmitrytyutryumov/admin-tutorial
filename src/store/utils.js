@@ -24,3 +24,18 @@ export const sortPurchases = ({ purchases, field, order }) => {
     return (value > nextValue ? 1 : -1) * order
   })
 }
+
+export const filterPurchases = (purchases, searchQuery) => {
+  if (searchQuery === '') {
+    return purchases
+  }
+
+  return [...purchases].filter((user) => {
+    return (
+      user['name'].toLowerCase().includes(searchQuery) ||
+      user['gameName'].toLowerCase().includes(searchQuery)
+    )
+  })
+}
+
+export const parseCurrencyField = (str) => parseFloat(str.replace('$', ''))

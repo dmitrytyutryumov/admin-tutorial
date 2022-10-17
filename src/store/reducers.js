@@ -1,52 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit'
 import * as purchaseApi from './api'
-import { sortPurchases } from './utils'
 
 export const purchasesSlice = createSlice({
   name: 'purchases',
   initialState: {
     purchases: [],
-    filteredPurchases: [],
     columns: {},
-    table: [],
     loading: true,
-    order: 1,
-    sortField: undefined,
+    order: -1,
+    sortField: 'rating',
+    searchQuery: '',
   },
   reducers: {
-    normalize: (state) => {
-      state.table = Object.keys(state.columns).map((column) => [column])
-      state.filteredPurchases.forEach((user) => {
-        Object.entries(user).forEach((item, idx) => {
-          state.table[idx].push(item[1])
-        })
-      })
-    },
     sort: (state, action) => {
       state.order *= -1
-      state.sortField = state.columns[action.payload.sortField] || state.order
-      state.filteredPurchases = sortPurchases({
-        purchases: state.purchases,
-        field: state.sortField,
-        order: state.order,
-      })
+      state.sortField = state.columns[action.payload] || state.order
     },
     filter: (state, action) => {
-      state.filteredPurchases = state.purchases.filter((user) => {
-        const searchQuery = action.payload.toLowerCase()
-        return (
-          user['name'].toLowerCase().includes(searchQuery) ||
-          user['gameName'].toLowerCase().includes(searchQuery)
-        )
-      })
+      state.searchQuery = action.payload.toLowerCase()
     },
     setPurchases: (state, action) => {
       state.purchases = action.payload
-      state.filteredPurchases = state.purchases
     },
     addPurchases: (state, action) => {
       state.purchases = [...state.purchases, ...action.payload]
-      state.filteredPurchases = state.purchases
     },
     setColumns: (state, action) => {
       state.columns = action.payload
@@ -80,10 +57,8 @@ export const fetchTableData = () => async (dispatch) => {
 export const addPurchases = () => async (dispatch) => {
   const purchases = await purchaseApi.fetchPurchases()
   dispatch(purchasesActions.addPurchases(purchases))
-  dispatch(purchasesActions.sort())
 }
 
 export const filterPurchases = (searchQuery) => (dispatch) => {
   dispatch(purchasesActions.filter(searchQuery))
-  dispatch(purchasesActions.normalize())
 }

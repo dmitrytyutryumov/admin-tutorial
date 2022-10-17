@@ -1,7 +1,21 @@
+import { sortPurchases, filterPurchases } from './utils'
+
 export const getPuschases = (state) => state.puschases
 
-export const getUsers = (state) => state.puschases.users
+export const getTable = (state) => {
+  state = getPuschases(state)
 
-export const getColumns = (state) => state.puschases.columns
-
-export const getTable = (state) => state.puschases.table
+  const table = Object.keys(state.columns).map((column) => [column])
+  let purchases = sortPurchases({
+    purchases: state.purchases,
+    field: state.sortField,
+    order: state.order,
+  })
+  purchases = filterPurchases(purchases, state.searchQuery)
+  purchases.forEach((user) => {
+    Object.entries(user).forEach((item, idx) => {
+      table[idx].push(item[1])
+    })
+  })
+  return table
+}
