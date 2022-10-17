@@ -4,6 +4,6 @@ import { ReactComponent as UncheckIcon } from '../../../static/images/x.svg'
 
 export default function CheckTableCell({ value }) {
   return (
-    <div className="table__cell">{value ? <CheckIcon /> : <UncheckIcon />}</div>
+    <td className="table__cell">{value ? <CheckIcon /> : <UncheckIcon />}</td>
   )
 }

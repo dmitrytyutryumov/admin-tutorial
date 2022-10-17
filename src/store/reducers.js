@@ -14,7 +14,7 @@ export const purchasesSlice = createSlice({
   reducers: {
     sort: (state, action) => {
       state.order *= -1
-      state.sortField = state.columns[action.payload] || state.order
+      state.sortField = action.payload || state.order
     },
     filter: (state, action) => {
       state.searchQuery = action.payload.toLowerCase()

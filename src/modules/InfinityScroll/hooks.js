@@ -6,7 +6,6 @@ export const useInfinityLoader = ({ ref, onLoadMore }) => {
 
   const stopScrolling = React.useCallback(() => {
     controller.abort()
-    console.log('abort', controller.signal.aborted)
   }, [controller.signal])
 
   const addScrollHandler = React.useCallback(() => {

@@ -76,7 +76,7 @@ chance.mixin({
 })
 
 chance.mixin({
-  user: function () {
+  purchase: function () {
     const country = chance.pickone(chance.countries)
     const game = chance.pickone(chance.games)
     const montlyWinnings = Array.from({ length: 12 }).map(() =>
@@ -113,8 +113,8 @@ chance.mixin({
   },
 })
 
-const getUsers = (usersNumber = 20) => {
-  return Array.from({ length: usersNumber }).map(() => chance.user())
+const getPurchases = (purchasesNumber = 20) => {
+  return Array.from({ length: purchasesNumber }).map(() => chance.purchase())
 }
 
 const getColumns = () => {
@@ -153,7 +153,7 @@ module.exports = [
         type: 'json', // variant type
         options: {
           status: 200,
-          body: getUsers(),
+          body: getPurchases(),
         },
       },
     ],

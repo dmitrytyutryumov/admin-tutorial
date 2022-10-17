@@ -1,21 +1,21 @@
 import React from 'react'
-import { getColumnCells } from './components'
+import { getRowCells } from './components'
 import './index.css'
 import { ReactComponent as LoadingIcon } from '../../static/images/loading.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPuschases, getTable } from '../../store/selectors'
+import { getPurchasesState } from '../../store/selectors'
 import {
   fetchTableData,
   addPurchases,
   purchasesActions,
+  // purchasesActions,
 } from '../../store/reducers'
 import { useInfinityLoader } from '../InfinityScroll/hooks'
 
 export function Table() {
   const ref = React.useRef()
   const dispatch = useDispatch()
-  const table = useSelector(getTable)
-  const { purchases } = useSelector(getPuschases)
+  const { columns, purchases } = useSelector(getPurchasesState)
 
   const updatePurchases = () => {
     console.log('updateUsers')
@@ -40,15 +40,29 @@ export function Table() {
   }
 
   return (
-    <ul className="table" ref={ref}>
-      {table.map((column) => {
-        return (
-          <div className="table__column" key={column}>
-            {getColumnCells({ column, sortHandler })}
-          </div>
-        )
-      })}
+    <table ref={ref} className="table">
+      <caption>Purchases history</caption>
+      <thead className="table__head">
+        <tr>
+          {Object.keys(columns).map((column) => {
+            return (
+              <th
+                key={column}
+                onClick={sortHandler}
+                data-target={columns[column]}
+              >
+                {column}
+              </th>
+            )
+          })}
+        </tr>
+      </thead>
+      <tbody>
+        {purchases.map((purchase, idx) => (
+          <tr key={idx}>{getRowCells(Object.entries(purchase))}</tr>
+        ))}
+      </tbody>
       {loading && <LoadingIcon />}
-    </ul>
+    </table>
   )
 }

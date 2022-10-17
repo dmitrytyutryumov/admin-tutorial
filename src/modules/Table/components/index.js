@@ -9,21 +9,16 @@ const CELLS = {
   bought: CheckTableCell,
 }
 
-export const getColumnCells = ({ column, sortHandler }) => {
-  return column.map((cell, idx) => {
-    const Cell = CELLS[column[0].toLowerCase()]
+export const getRowCells = (column) => {
+  return column.map((cell) => {
+    const [key, value] = cell
+    const Cell = CELLS[key.toLowerCase()] || TableCell
 
-    if (idx !== 0 && Cell) {
-      return <Cell value={cell} key={idx} />
+    if (key === 'id') {
+      return
     }
-    return (
-      <TableCell
-        value={cell}
-        key={idx}
-        data-target={cell}
-        onClick={idx === 0 ? sortHandler : null}
-      />
-    )
+
+    return <Cell value={value} key={key} />
   })
 }
 

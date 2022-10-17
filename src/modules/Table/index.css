@@ -1,46 +1,37 @@
 .table {
-  padding: 0.2rem 1rem;
-
-  display: grid;
-  grid-auto-flow: column;
-  gap: 1rem;
+  display: block;
+  --font-size: 1.3rem;
 
   max-height: 80vh;
-  max-width: 100%;
   overflow: auto;
 
   background-color: rgb(248, 248, 248);
   border: rgb(135, 134, 134) solid 1px;
   border-radius: 0.3rem;
+
+  font-size: var(--font-size);
 }
 
-.table__column {
-  display: grid;
-  grid-auto-rows: minmax(30px, 50px);
-}
-
-/* table cell style */
-.table__cell {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.3rem;
-
-  white-space: nowrap;
-  text-overflow: clip;
-}
-
-.table__cell:first-child {
+.table__head {
   font-weight: 600;
   cursor: pointer;
 }
 
+/* table cell style */
+.table__cell {
+  padding-inline: 0.5rem;
+  vertical-align: middle;
+  text-align: start;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+
 .table__country-cell {
   display: grid;
+  gap: 0.3rem;
   grid-template-columns: minmax(35px, 30%) 1fr;
 }
 
 .table__cell > svg {
-  width: 1rem;
+  width: var(--font-size);
 }
