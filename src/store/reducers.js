@@ -55,8 +55,10 @@ export const fetchTableData = () => async (dispatch) => {
 }
 
 export const addPurchases = () => async (dispatch) => {
+  dispatch(purchasesActions.startLoading())
   const purchases = await purchaseApi.fetchPurchases()
   dispatch(purchasesActions.addPurchases(purchases))
+  dispatch(purchasesActions.finishLoading())
 }
 
 export const filterPurchases = (searchQuery) => (dispatch) => {
