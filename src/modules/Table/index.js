@@ -8,7 +8,6 @@ import {
   fetchTableData,
   addPurchases,
   purchasesActions,
-  // purchasesActions,
 } from '../../store/reducers'
 import { useInfinityLoader } from '../InfinityScroll/hooks'
 
@@ -18,7 +17,6 @@ export function Table() {
   const { columns, purchases } = useSelector(getPurchasesState)
 
   const updatePurchases = () => {
-    console.log('updateUsers')
     dispatch(addPurchases())
   }
 
@@ -35,7 +33,7 @@ export function Table() {
     dispatch(fetchTableData())
   }, [])
 
-  if (purchases.length >= 50) {
+  if (purchases.length >= 200) {
     stopScrolling()
   }
 
