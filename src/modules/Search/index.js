@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { filterPurchases } from '../../store/reducers'
+import { purchasesActions } from '../../store/reducers'
 import './index.css'
 
 export default function SearchForm({}) {
@@ -8,7 +8,7 @@ export default function SearchForm({}) {
   const ref = useRef()
 
   const onChange = () => {
-    dispatch(filterPurchases(ref.current.value))
+    dispatch(purchasesActions.filter(ref.current.value))
   }
 
   return (

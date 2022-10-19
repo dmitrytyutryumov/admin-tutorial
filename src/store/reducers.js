@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import * as purchaseApi from './api'
 
 export const purchasesSlice = createSlice({
   name: 'purchases',
@@ -10,6 +9,7 @@ export const purchasesSlice = createSlice({
     order: -1,
     sortField: 'rating',
     searchQuery: '',
+    error: '',
   },
   reducers: {
     sort: (state, action) => {
@@ -19,20 +19,20 @@ export const purchasesSlice = createSlice({
     filter: (state, action) => {
       state.searchQuery = action.payload.toLowerCase()
     },
-    setPurchases: (state, action) => {
-      state.purchases = action.payload
-    },
     addPurchases: (state, action) => {
       state.purchases = [...state.purchases, ...action.payload]
     },
-    setColumns: (state, action) => {
-      state.columns = action.payload
-    },
-    startLoading: (state) => {
+    request: (state) => {
       state.loading = true
     },
-    finishLoading: (state) => {
+    success: (state, action) => {
+      state.columns = action.payload.columns || state.columns
+      state.purchases = action.payload.purchases || state.purchases
       state.loading = false
+    },
+    failure: (state, action) => {
+      state.loading = false
+      state.error = action.payload
     },
     setOrder: (state) => {
       state.order = action.payload
@@ -45,22 +45,3 @@ export const purchasesSlice = createSlice({
 
 export const purchasesActions = purchasesSlice.actions
 export default purchasesSlice.reducer
-
-export const fetchTableData = () => async (dispatch) => {
-  dispatch(purchasesActions.startLoading())
-  const [columns, purchases] = await purchaseApi.fetchTableData()
-  dispatch(purchasesActions.setColumns(columns))
-  dispatch(purchasesActions.setPurchases(purchases))
-  dispatch(purchasesActions.finishLoading())
-}
-
-export const addPurchases = () => async (dispatch) => {
-  dispatch(purchasesActions.startLoading())
-  const purchases = await purchaseApi.fetchPurchases()
-  dispatch(purchasesActions.addPurchases(purchases))
-  dispatch(purchasesActions.finishLoading())
-}
-
-export const filterPurchases = (searchQuery) => (dispatch) => {
-  dispatch(purchasesActions.filter(searchQuery))
-}

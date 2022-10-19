@@ -1,19 +1,35 @@
 import { createAction } from '@reduxjs/toolkit'
-import { put, call } from 'redux-saga/effects'
+import { put, call, all, takeEvery } from 'redux-saga/effects'
+import { purchasesActions } from './reducers'
+import * as purchaseApi from './api'
 
 export const loadTableDataAction = createAction('load-table-data')
+export const addPurchasesAction = createAction('add-purchases')
 
 export function* fetchTableDataSaga() {
-  console.log('fetchTableDataSaga')
-  yield put(purchasesActions.startLoading())
-  const [columns, purchases] = yield call(purchaseApi.fetchTableData)
-  console.log(columns, purchases)
-  yield put(purchasesActions.setColumns(columns))
-  yield put(purchasesActions.setPurchases(purchases))
-  yield put(purchasesActions.finishLoading)
+  try {
+    yield put(purchasesActions.request())
+    const [columns, purchases] = yield call(purchaseApi.fetchTableData)
+    yield put(purchasesActions.success({ columns, purchases }))
+  } catch (error) {
+    yield put(purchasesActions.failure(error.message))
+  }
+}
+
+export function* addPurchases() {
+  try {
+    yield put(purchasesActions.request())
+    const purchases = yield call(purchaseApi.fetchPurchases)
+    yield put(purchasesActions.addPurchases(purchases))
+    yield put(purchasesActions.success())
+  } catch (error) {
+    yield put(purchasesActions.failure(error.message))
+  }
 }
 
 export default function* rootSaga() {
-  console.log('rootSaga')
-  yield [fetchTableDataSaga()]
+  yield all([
+    takeEvery(loadTableDataAction, fetchTableDataSaga),
+    takeEvery(addPurchasesAction, addPurchases),
+  ])
 }

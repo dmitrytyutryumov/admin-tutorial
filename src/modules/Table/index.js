@@ -4,12 +4,9 @@ import './index.css'
 import { ReactComponent as LoadingIcon } from '../../static/images/loading.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPurchasesState } from '../../store/selectors'
-import {
-  fetchTableData,
-  addPurchases,
-  purchasesActions,
-} from '../../store/reducers'
+import { purchasesActions } from '../../store/reducers'
 import { useInfinityLoader } from '../InfinityScroll/hooks'
+import { addPurchasesAction, loadTableDataAction } from '../../store/sagas'
 
 export function Table() {
   const ref = React.useRef()
@@ -17,7 +14,7 @@ export function Table() {
   const { columns, purchases } = useSelector(getPurchasesState)
 
   const updatePurchases = () => {
-    dispatch(addPurchases())
+    dispatch(addPurchasesAction())
   }
 
   const [loading, stopScrolling] = useInfinityLoader({
@@ -30,7 +27,7 @@ export function Table() {
   }
 
   React.useEffect(() => {
-    dispatch(fetchTableData())
+    dispatch(loadTableDataAction())
   }, [])
 
   if (purchases.length >= 200) {
