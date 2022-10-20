@@ -6,13 +6,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getPurchasesState } from '../../store/selectors'
 import { purchasesActions } from '../../store/reducers'
 import { useInfinityLoader } from '../InfinityScroll/hooks'
-import { addPurchasesAction, loadTableDataAction } from '../../store/sagas'
+import {
+  addPurchasesAction,
+  loadTableDataAction,
+  moveColumnAction,
+} from '../../store/sagas'
+import TableHeadCell from './components/TableHeadCell'
 
 export function Table() {
   const ref = React.useRef()
   const dispatch = useDispatch()
   const { columns, purchases } = useSelector(getPurchasesState)
-
   const updatePurchases = () => {
     dispatch(addPurchasesAction())
   }
@@ -34,27 +38,36 @@ export function Table() {
     stopScrolling()
   }
 
+  const onDrop = (item) => {
+    dispatch(moveColumnAction(item))
+  }
+
   return (
     <table ref={ref} className="table">
       <caption>Purchases history</caption>
       <thead className="table__head">
         <tr>
-          {Object.keys(columns).map((column) => {
+          {columns.map(({ verbose, id }, index) => {
             return (
-              <th
-                key={column}
+              <TableHeadCell
+                key={id}
+                index={index}
+                id={id}
+                data-target={id}
                 onClick={sortHandler}
-                data-target={columns[column]}
+                onDrop={onDrop}
               >
-                {column}
-              </th>
+                {verbose}
+              </TableHeadCell>
             )
           })}
         </tr>
       </thead>
       <tbody>
         {purchases.map((purchase, idx) => (
-          <tr key={idx}>{getRowCells(Object.entries(purchase))}</tr>
+          <tr key={idx}>
+            {getRowCells({ columns: columns, purchase: purchase })}
+          </tr>
         ))}
       </tbody>
       {loading && <LoadingIcon />}

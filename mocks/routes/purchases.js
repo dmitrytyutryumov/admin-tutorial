@@ -118,28 +118,28 @@ const getPurchases = (purchasesNumber = 20) => {
 }
 
 const getColumns = () => {
-  return {
-    Name: 'name',
-    Language: 'language',
-    Country: 'country',
-    'Game Name': 'gameName',
-    Bought: 'bought',
-    'Bank Balance': 'bankBalance',
-    Rating: 'rating',
-    'Total Winnings': 'totalWinnings',
-    Jan: 'jan',
-    Feb: 'feb',
-    Mar: 'mar',
-    Apr: 'apr',
-    May: 'may',
-    Jun: 'jun',
-    Jul: 'jul',
-    Aug: 'aug',
-    Sep: 'sep',
-    Oct: 'oct',
-    Nov: 'nov',
-    Dec: 'dec',
-  }
+  return [
+    { verbose: 'Name', id: 'name' },
+    { verbose: 'Language', id: 'language' },
+    { verbose: 'Country', id: 'country' },
+    { verbose: 'Game Name', id: 'gameName' },
+    { verbose: 'Bought', id: 'bought' },
+    { verbose: 'Bank Balance', id: 'bankBalance' },
+    { verbose: 'Rating', id: 'rating' },
+    { verbose: 'Total Winnings', id: 'totalWinnings' },
+    { verbose: 'Jan', id: 'jan' },
+    { verbose: 'Feb', id: 'feb' },
+    { verbose: 'Mar', id: 'mar' },
+    { verbose: 'Apr', id: 'apr' },
+    { verbose: 'May', id: 'may' },
+    { verbose: 'Jun', id: 'jun' },
+    { verbose: 'Jul', id: 'jul' },
+    { verbose: 'Aug', id: 'aug' },
+    { verbose: 'Sep', id: 'sep' },
+    { verbose: 'Oct', id: 'oct' },
+    { verbose: 'Nov', id: 'nov' },
+    { verbose: 'Dec', id: 'dec' },
+  ]
 }
 
 module.exports = [

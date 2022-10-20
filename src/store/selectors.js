@@ -11,3 +11,5 @@ export const getPurchasesState = (state) => {
   purchases = filterPurchases(purchases, searchQuery)
   return { columns, purchases }
 }
+
+export const getColumns = (state) => state.purchases.columns

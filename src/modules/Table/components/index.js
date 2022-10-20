@@ -9,16 +9,10 @@ const CELLS = {
   bought: CheckTableCell,
 }
 
-export const getRowCells = (column) => {
-  return column.map((cell) => {
-    const [key, value] = cell
-    const Cell = CELLS[key.toLowerCase()] || TableCell
-
-    if (key === 'id') {
-      return
-    }
-
-    return <Cell value={value} key={key} />
+export const getRowCells = ({ columns, purchase }) => {
+  return columns.map(({ id: columnId }) => {
+    const Cell = CELLS[columnId] || TableCell
+    return <Cell value={purchase[columnId]} key={columnId} />
   })
 }
 

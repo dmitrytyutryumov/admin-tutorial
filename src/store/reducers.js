@@ -4,7 +4,7 @@ export const purchasesSlice = createSlice({
   name: 'purchases',
   initialState: {
     purchases: [],
-    columns: {},
+    columns: [],
     loading: true,
     order: -1,
     sortField: 'rating',
@@ -39,6 +39,12 @@ export const purchasesSlice = createSlice({
     },
     setSortField: (state, action) => {
       state.sortField = action.payload
+    },
+    moveColumn: (state, { payload }) => {
+      const dragItem = state.columns[payload.dragIndex]
+      const hoverItem = state.columns[payload.hoverIndex]
+      state.columns.splice(payload.dragIndex, 1, hoverItem)
+      state.columns.splice(payload.hoverIndex, 1, dragItem)
     },
   },
 })
