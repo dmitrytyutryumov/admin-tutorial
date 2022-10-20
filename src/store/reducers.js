@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import * as purchasesActions from './actions'
 
 export const purchasesSlice = createSlice({
   name: 'purchases',
@@ -11,43 +12,38 @@ export const purchasesSlice = createSlice({
     searchQuery: '',
     error: '',
   },
-  reducers: {
-    sort: (state, action) => {
-      state.order *= -1
-      state.sortField = action.payload || state.order
-    },
-    filter: (state, action) => {
-      state.searchQuery = action.payload.toLowerCase()
-    },
-    addPurchases: (state, action) => {
-      state.purchases = [...state.purchases, ...action.payload]
-    },
-    request: (state) => {
-      state.loading = true
-    },
-    success: (state, action) => {
-      state.columns = action.payload.columns || state.columns
-      state.purchases = action.payload.purchases || state.purchases
-      state.loading = false
-    },
-    failure: (state, action) => {
-      state.loading = false
-      state.error = action.payload
-    },
-    setOrder: (state) => {
-      state.order = action.payload
-    },
-    setSortField: (state, action) => {
-      state.sortField = action.payload
-    },
-    moveColumn: (state, { payload }) => {
-      const dragItem = state.columns[payload.dragIndex]
-      const hoverItem = state.columns[payload.hoverIndex]
-      state.columns.splice(payload.dragIndex, 1, hoverItem)
-      state.columns.splice(payload.hoverIndex, 1, dragItem)
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(purchasesActions.request, (state) => {
+        state.loading = true
+      })
+      .addCase(purchasesActions.success, (state, action) => {
+        state.columns = action.payload.columns || state.columns
+        state.purchases = action.payload.purchases || state.purchases
+        state.loading = false
+      })
+      .addCase(purchasesActions.failure, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
+      .addCase(purchasesActions.sortPurchases, (state, action) => {
+        state.order *= -1
+        state.sortField = action.payload || state.order
+      })
+      .addCase(purchasesActions.filterPurchases, (state, action) => {
+        state.searchQuery = action.payload.toLowerCase()
+      })
+      .addCase(purchasesActions.addPurchases, (state, action) => {
+        state.purchases = [...state.purchases, ...action.payload]
+      })
+      .addCase(purchasesActions.moveColumn, (state, { payload }) => {
+        const dragItem = state.columns[payload.dragIndex]
+        const hoverItem = state.columns[payload.hoverIndex]
+        state.columns.splice(payload.dragIndex, 1, hoverItem)
+        state.columns.splice(payload.hoverIndex, 1, dragItem)
+      })
   },
 })
 
-export const purchasesActions = purchasesSlice.actions
 export default purchasesSlice.reducer

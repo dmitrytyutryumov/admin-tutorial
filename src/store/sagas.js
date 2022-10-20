@@ -1,12 +1,7 @@
-import { createAction } from '@reduxjs/toolkit'
 import { put, call, all, takeEvery, select } from 'redux-saga/effects'
-import { purchasesActions } from './reducers'
 import * as purchaseApi from './api'
 import { getColumns } from './selectors'
-
-export const loadTableDataAction = createAction('load-table-data')
-export const addPurchasesAction = createAction('add-purchases')
-export const moveColumnAction = createAction('move-column')
+import * as purchasesActions from './actions'
 
 export function* fetchTableDataSaga() {
   try {
@@ -15,12 +10,13 @@ export function* fetchTableDataSaga() {
     let userColumns = localStorage.getItem('columns')
     if (userColumns !== null) {
       userColumns = JSON.parse(userColumns)
+      const newColumns = userColumns.filter((column) =>
+        columns.includes(column)
+      )
+      if (newColumns.length > 0) {
+        userColumns.concat(newColumns)
+      }
     }
-    const newColumns = userColumns.filter((column) => columns.includes(column))
-    if (newColumns.length > 0) {
-      userColumns.concat(newColumns)
-    }
-
     yield put(
       purchasesActions.success({ columns: userColumns || columns, purchases })
     )
@@ -48,8 +44,8 @@ export function* moveColumn({ payload }) {
 
 export default function* rootSaga() {
   yield all([
-    takeEvery(loadTableDataAction, fetchTableDataSaga),
-    takeEvery(addPurchasesAction, addPurchases),
-    takeEvery(moveColumnAction, moveColumn),
+    takeEvery(purchasesActions.loadTableDataSaga, fetchTableDataSaga),
+    takeEvery(purchasesActions.addPurchasesSaga, addPurchases),
+    takeEvery(purchasesActions.moveColumnSaga, moveColumn),
   ])
 }

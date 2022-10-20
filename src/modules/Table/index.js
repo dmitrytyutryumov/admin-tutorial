@@ -4,13 +4,8 @@ import './index.css'
 import { ReactComponent as LoadingIcon } from '../../static/images/loading.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPurchasesState } from '../../store/selectors'
-import { purchasesActions } from '../../store/reducers'
+import * as purchasesActions from '../../store/actions'
 import { useInfinityLoader } from '../InfinityScroll/hooks'
-import {
-  addPurchasesAction,
-  loadTableDataAction,
-  moveColumnAction,
-} from '../../store/sagas'
 import TableHeadCell from './components/TableHeadCell'
 
 export function Table() {
@@ -18,7 +13,7 @@ export function Table() {
   const dispatch = useDispatch()
   const { columns, purchases } = useSelector(getPurchasesState)
   const updatePurchases = () => {
-    dispatch(addPurchasesAction())
+    dispatch(purchasesActions.addPurchasesSaga())
   }
 
   const [loading, stopScrolling] = useInfinityLoader({
@@ -27,11 +22,11 @@ export function Table() {
   })
 
   const sortHandler = (event) => {
-    dispatch(purchasesActions.sort(event.target.dataset.target))
+    dispatch(purchasesActions.sortPurchases(event.target.dataset.target))
   }
 
   React.useEffect(() => {
-    dispatch(loadTableDataAction())
+    dispatch(purchasesActions.loadTableDataSaga())
   }, [])
 
   if (purchases.length >= 200) {
@@ -39,7 +34,7 @@ export function Table() {
   }
 
   const onDrop = (item) => {
-    dispatch(moveColumnAction(item))
+    dispatch(purchasesActions.moveColumnSaga(item))
   }
 
   return (
