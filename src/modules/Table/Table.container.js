@@ -1,35 +1,30 @@
-import React from 'react'
-import './index.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useRef } from 'react'
 import { getPurchasesState } from '../../store/selectors'
 import * as purchasesActions from '../../store/actions'
 import { useInfinityLoader } from '../InfinityScroll/hooks'
 import { TableView } from './Table.view'
 
-export function TableContainer() {
-  const ref = React.useRef()
-  const dispatch = useDispatch()
-  const { columns, purchases } = useSelector(getPurchasesState)
-  const updatePurchases = () => {
-    dispatch(purchasesActions.addPurchasesSaga())
-  }
+import './index.css'
+import { connect } from 'react-redux'
 
+function TableContainer({
+  columns,
+  purchases,
+  onDrop,
+  onSort,
+  loadData,
+  updatePurchases,
+}) {
+  const ref = useRef()
   const [loading] = useInfinityLoader({
-    ref: ref,
+    ref,
     onLoadMore: updatePurchases,
   })
 
-  const sortHandler = (event) => {
-    dispatch(purchasesActions.sortPurchases(event.target.dataset.target))
-  }
-
-  React.useEffect(() => {
-    dispatch(purchasesActions.loadTableDataSaga())
+  useEffect(() => {
+    loadData()
   }, [])
 
-  const onDrop = (item) => {
-    dispatch(purchasesActions.moveColumnSaga(item))
-  }
   return (
     <TableView
       ref={ref}
@@ -37,7 +32,27 @@ export function TableContainer() {
       purchases={purchases}
       loading={loading}
       onDrop={onDrop}
-      onSort={sortHandler}
+      onSort={onSort}
     />
   )
 }
+
+const mapStatetoProps = (state) => {
+  const { columns, purchases } = getPurchasesState(state)
+  return { columns, purchases }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  onDrop: (item) => {
+    dispatch(purchasesActions.moveColumnSaga(item))
+  },
+  onSort: (event) => {
+    dispatch(purchasesActions.sortPurchases(event.target.dataset.target))
+  },
+  loadData: () => dispatch(purchasesActions.loadTableDataSaga()),
+  updatePurchases: () => {
+    dispatch(purchasesActions.addPurchasesSaga())
+  },
+})
+
+export default connect(mapStatetoProps, mapDispatchToProps)(TableContainer)
