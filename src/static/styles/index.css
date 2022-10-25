@@ -6,23 +6,6 @@ html, body, #root, .App {
   height: 100%;
 }
 
-.app-container {
-  padding-inline: clamp(3rem, 2vw + 3rem, 30vw);
-}
-
-
-.header {
-  margin-bottom: 1rem;
-  padding: 1rem;
-
-  font-size: clamp(2rem, 1rem + 1.5vw ,5rem);
-  font-weight: 600;
-  color: #fff;
-
-  background-color: rgb(76, 76, 180);
-  max-height: 10vh;
-}
-
 img {
   width: 100%;
   height: auto;

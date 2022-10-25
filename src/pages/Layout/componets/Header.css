@@ -1,0 +1,11 @@
+.header {
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  font-size: clamp(2rem, 1rem + 1.5vw, 5rem);
+  font-weight: 600;
+  color: #fff;
+
+  background-color: rgb(76, 76, 180);
+  max-height: 10vh;
+}
