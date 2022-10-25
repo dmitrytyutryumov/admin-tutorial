@@ -28,5 +28,6 @@ module.exports = {
         varsIgnorePattern: 'React',
       },
     ],
+    'react/display-name': [1, { ignoreTranspilerName: false }],
   },
 }

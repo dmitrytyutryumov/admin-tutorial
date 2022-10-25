@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import './settings'
+import './service'
 import './static/styles/index.css'
 import { store } from './store'
 

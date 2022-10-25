@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import { COLUMN } from '../constants'
+import { COLUMN } from '../../../constants'
 
 export default function TableHeadCell({
   id,
@@ -23,7 +23,7 @@ export default function TableHeadCell({
     [index]
   )
 
-  const [{}, drop] = useDrop(
+  const [, drop] = useDrop(
     () => ({
       accept: COLUMN,
       drop: (item, monitor) =>

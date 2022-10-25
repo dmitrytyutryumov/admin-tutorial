@@ -9,6 +9,10 @@ export const useInfinityLoader = ({ ref, onLoadMore }) => {
   const stopScrolling = () => controller.abort()
 
   const addScrollHandler = React.useCallback(() => {
+    if (ref === undefined) {
+      return
+    }
+
     ref.current.addEventListener(
       'scroll',
       () => {

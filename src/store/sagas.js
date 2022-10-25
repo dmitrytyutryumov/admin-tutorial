@@ -1,5 +1,5 @@
 import { put, call, all, takeEvery, select } from 'redux-saga/effects'
-import * as purchaseApi from './api'
+import * as purchaseApi from '../api/Purchases'
 import { getColumns } from './selectors'
 import * as purchasesActions from './actions'
 

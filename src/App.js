@@ -1,4 +1,3 @@
-import SearchForm from './modules/Search'
 import { Table } from './modules/Table'
 
 function App() {
@@ -7,7 +6,6 @@ function App() {
       <header className="header">Users&apos; purchases</header>
       <main className="app-container">
         <section>
-          <SearchForm />
           <Table />
         </section>
       </main>

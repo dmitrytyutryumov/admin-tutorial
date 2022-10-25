@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactComponent as StarIcon } from '../../../static/images/star.svg'
+import { StarIcon } from '../../../../../static/images'
 
 export default function RatingTableCell({ value }) {
   return (

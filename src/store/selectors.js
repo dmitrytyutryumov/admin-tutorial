@@ -1,4 +1,4 @@
-import { sortPurchases, filterPurchases } from './utils'
+import { sortPurchases, filterPurchases } from '../utils/Purchases'
 
 export const getPurchasesState = (state) => {
   const { columns, sortField, order, searchQuery } = state.purchases
