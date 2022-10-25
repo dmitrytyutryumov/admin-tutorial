@@ -3,7 +3,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage'
 import Layout from './pages/Layout/Layout'
 import NotFound from './pages/NotFound/NotFound'
 
-function App() {
+export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -14,5 +14,3 @@ function App() {
     </BrowserRouter>
   )
 }
-
-export default App
