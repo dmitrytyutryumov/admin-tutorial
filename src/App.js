@@ -8,8 +8,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index path="/" element={<Layout />} />
-        <Route path="/404" element={<NotFound />} />
         <Route path="/error" element={<ErrorPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
