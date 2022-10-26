@@ -8,7 +8,11 @@ export const getPurchasesState = (state) => {
     field: sortField,
     order,
   })
-  purchases = filterPurchases(purchases, searchQuery)
+  purchases = filterPurchases({
+    purchases,
+    searchQuery,
+    fields: ['name', 'gameName'],
+  })
   return { columns, purchases }
 }
 

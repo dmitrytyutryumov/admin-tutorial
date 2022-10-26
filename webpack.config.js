@@ -24,7 +24,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       title: 'Table tutorial',
-      template: path.resolve(__dirname, './src/template.html'),
+      template: path.resolve(__dirname, './public/template.html'),
       filename: 'index.html',
     }),
     new CleanWebpackPlugin(),

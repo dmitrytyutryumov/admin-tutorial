@@ -8,9 +8,4 @@ Current node version is v16.17.1
 
 TODO:
 Refactor table cells / componets
-
-add router + pages module
-404 page
-error page
-
 tests

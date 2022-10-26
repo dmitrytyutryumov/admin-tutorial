@@ -1,4 +1,7 @@
 export const sortPurchases = ({ purchases, field, order }) => {
+  if (!field) {
+    return [...purchases]
+  }
   return [...purchases].sort((purchase, nextUser) => {
     let value = purchase[[field]]
     let nextValue = nextUser[[field]]
@@ -25,17 +28,18 @@ export const sortPurchases = ({ purchases, field, order }) => {
   })
 }
 
-export const filterPurchases = (purchases, searchQuery) => {
-  if (searchQuery === '') {
+export const filterPurchases = ({ purchases, searchQuery, fields }) => {
+  if (searchQuery === '' || !fields) {
     return purchases
   }
 
-  return [...purchases].filter((user) => {
-    return (
-      user['name'].toLowerCase().includes(searchQuery) ||
-      user['gameName'].toLowerCase().includes(searchQuery)
-    )
-  })
+  return [...purchases].filter(
+    (user) =>
+      fields.filter((field) => {
+        const fieldValue = user[[field]] || ''
+        return fieldValue.toLowerCase().includes(searchQuery)
+      }).length !== 0
+  )
 }
 
 export const parseCurrencyField = (str) => parseFloat(str.replace('$', ''))
