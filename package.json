@@ -54,8 +54,10 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.19.6",
     "@mocks-server/main": "^4.0.0",
     "@testing-library/react": "^13.4.0",
+    "babel-jest": "^29.2.2",
     "clean-webpack-plugin": "^4.0.0",
     "eslint": "^8.24.0",
     "eslint-config-google": "^0.14.0",
@@ -79,6 +81,30 @@
     ],
     "*.{html,css,less}": [
       "prettier --write"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": -10
+      }
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "transform": {
+      "^.+\\.(js|jsx)?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/"
     ]
   }
 }

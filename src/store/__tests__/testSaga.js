@@ -1,3 +1,5 @@
+// import { fetchTableDataSaga, addPurchases, moveColumn } from '../sagas'
+
 describe('test table saga', () => {
   it('test fetchTableDataSaga', () => {
     // Arrange

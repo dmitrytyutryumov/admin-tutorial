@@ -5,8 +5,6 @@ export function InfinityScroll({ children, onLoadMore, loader, hasItems }) {
   const [loading, setLoading] = React.useState(false)
   const controller = React.useMemo(() => new AbortController())
 
-  console.log(children)
-
   if (!hasItems && !controller.signal.aborted) {
     controller.abort()
   }
