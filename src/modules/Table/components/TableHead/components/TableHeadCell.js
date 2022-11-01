@@ -2,14 +2,9 @@ import React from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { COLUMN } from '../../../constants'
 
-export default function TableHeadCell({
-  id,
-  index,
-  children,
-  onDrop,
-  ...props
-}) {
+export function TableHeadCell({ id, index, children, onDrop, ...props }) {
   const ref = React.useRef(null)
+
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: COLUMN,

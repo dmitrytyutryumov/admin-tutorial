@@ -12,7 +12,6 @@ export const useInfinityLoader = ({ ref, onLoadMore }) => {
     if (ref === undefined) {
       return
     }
-
     ref.current.addEventListener(
       'scroll',
       () => {

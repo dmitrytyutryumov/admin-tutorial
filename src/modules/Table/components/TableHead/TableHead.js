@@ -1,9 +1,9 @@
 import React from 'react'
-import TableHeadCell from './components/TableHeadCell'
+import { TableHeadCell } from './components/TableHeadCell'
 
-export function TableHead({ columns, onSort, onDrop }) {
+export function TableHead({ columns, onSort, onDrop, ...props }) {
   return (
-    <thead className="table__head">
+    <thead className="table__head" {...props}>
       <tr>
         {columns.map(({ verbose, id }, index) => {
           return (

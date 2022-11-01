@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
 import { getPurchasesState } from '../../store/selectors'
 import * as purchasesActions from '../../store/actions'
-import { useInfinityLoader } from '../InfinityScroll/hooks'
 import { TableView } from './Table.view'
 
 import './index.css'
 import { connect } from 'react-redux'
+import { useInfinityLoader } from '../../hooks'
 
 function TableContainer({
   columns,
