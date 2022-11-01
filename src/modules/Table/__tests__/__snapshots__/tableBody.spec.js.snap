@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test table body test TableBody 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="table__cell"
+        >
+          FakeName
+        </td>
+        <td
+          class="table__cell"
+        >
+          333
+        </td>
+      </tr>
+      <tr>
+        <td
+          class="table__cell"
+        >
+          FakeName2
+        </td>
+        <td
+          class="table__cell"
+        >
+          222
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`test table cell utils test getTableCell 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="table__cell table__country-cell"
+        >
+          <figure>
+            <img
+              alt="e icon"
+              src="T"
+            />
+          </figure>
+          <div>
+            e
+          </div>
+        </td>
+        <td
+          class="table__cell"
+        >
+          <svg>
+            star.svg
+          </svg>
+        </td>
+        <td
+          class="table__cell"
+        >
+          <svg>
+            check.svg
+          </svg>
+        </td>
+        <td
+          class="table__cell"
+        >
+          333
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
