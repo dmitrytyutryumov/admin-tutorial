@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test purchase form test purchase form 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+    class="purchase-form"
+  >
+    <h1
+      class="purchase-form__title"
+    >
+      Purchase Details
+    </h1>
+    <div
+      class="purchase-form__body"
+    >
+      <div
+        class="form-input-wrapper"
+      >
+        <label
+          class="input-label "
+          for="string"
+        >
+          String
+        </label>
+        <input
+          checked=""
+          class="text-input "
+          id="string"
+          name="string"
+          type="number"
+          value="1"
+        />
+      </div>
+      <div
+        class="form-input-wrapper"
+      >
+        <label
+          class="input-label "
+          for="number"
+        >
+          Number
+        </label>
+        <input
+          checked=""
+          class="text-input "
+          id="number"
+          name="number"
+          type="number"
+          value="1"
+        />
+      </div>
+      <div
+        class="form-input-wrapper"
+      >
+        <label
+          class="input-label "
+          for="boolean"
+        >
+          Boolean
+        </label>
+        <input
+          checked=""
+          class="text-input "
+          id="boolean"
+          name="boolean"
+          type="number"
+          value="1"
+        />
+      </div>
+      <div
+        class="form-input-wrapper"
+      >
+        <label
+          class="input-label "
+          for="array"
+        >
+          Array
+        </label>
+        <input
+          checked=""
+          class="text-input "
+          id="array"
+          name="array"
+          type="number"
+          value="1"
+        />
+      </div>
+      <button
+        class="btn purchase-form__btn"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</DocumentFragment>
+`;

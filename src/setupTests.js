@@ -17,3 +17,14 @@ const localStorageMock = {
   clear: jest.fn(),
 }
 global.localStorage = localStorageMock
+
+jest.mock('formik', () => ({
+  ...jest.requireActual('formik'),
+  useField: jest.fn(),
+}))
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+  useLoaderData: jest.fn(),
+}))
