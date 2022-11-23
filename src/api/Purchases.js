@@ -21,3 +21,11 @@ export const fetchColumns = async () => {
 export const fetchTableData = async () => {
   return await axios.all([fetchColumns(), fetchPurchases()])
 }
+
+export const fetchPurchase = async (id) => {
+  return await axios.get(`/purchases/${id}`)
+}
+
+export const updatePurchase = async (id, data) => {
+  return await axios.patch(`/purchases/${id}`, data)
+}

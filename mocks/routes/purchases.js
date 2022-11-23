@@ -114,7 +114,9 @@ chance.mixin({
 })
 
 const getPurchases = (purchasesNumber = 20) => {
-  return Array.from({ length: purchasesNumber }).map(() => chance.purchase())
+  return Array.from({ length: purchasesNumber }).map((_, key) => {
+    return { id: key + 1, ...chance.purchase() }
+  })
 }
 
 const getColumns = () => {
@@ -154,6 +156,23 @@ module.exports = [
         options: {
           status: 200,
           body: getPurchases(),
+        },
+      },
+    ],
+  },
+  {
+    id: 'get-purchase', // route id
+    url: '/api/purchases/:id', // url in express format
+    method: ['GET', 'PATCH', 'POST'], // HTTP methods
+    variants: [
+      {
+        id: 'success', // id of the variant
+        type: 'middleware', // variant type
+        options: {
+          middleware: (req, res) => {
+            res.status(200)
+            res.send(getPurchases().find((p) => p.id == req.params.id))
+          },
         },
       },
     ],

@@ -42,6 +42,20 @@ td {
   border-radius: 0.3rem;
 }
 
+.input-invalid {
+  border: 2px solid red;
+}
+
+.input-label {
+  font-size: 1.5rem;
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+.label-invalid {
+  color: red;
+}
+
 #loading-icon {
   position: absolute;
   left: 50%;

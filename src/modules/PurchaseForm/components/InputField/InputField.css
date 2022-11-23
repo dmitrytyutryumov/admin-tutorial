@@ -1,0 +1,10 @@
+.form-input-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.dollar-field {
+  background: url('https://static.thenounproject.com/png/101791-200.png')
+    no-repeat left;
+}

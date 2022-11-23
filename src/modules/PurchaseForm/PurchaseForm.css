@@ -1,0 +1,29 @@
+.purchase-form {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
+
+  background-color: rgb(248, 248, 248);
+  border: rgb(135, 134, 134) solid 1px;
+  border-radius: 0.3rem;
+}
+
+.purchase-form__title {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2rem;
+  line-height: 1.1;
+
+  font-weight: 500;
+}
+
+.purchase-form__body {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+}
+
+.purchase-form__btn {
+  width: 100%;
+  min-height: 2rem;
+}
