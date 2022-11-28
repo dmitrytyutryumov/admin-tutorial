@@ -20,3 +20,5 @@ export const getColumns = (state) => state.purchases.columns
 
 export const getPurchase = ({ purchases: { purchases } }, currentId) =>
   purchases.filter(({ id }) => id === currentId)
+
+export const getPurchases = ({ purchases: { purchases } }) => purchases

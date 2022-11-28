@@ -1,16 +1,24 @@
-import React from 'react'
-import { Table } from '../../modules/Table'
-import Header from './componets/Header'
+import { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Header } from './componets/Header/'
+import { Tabs } from './componets/Tabs'
 import './Layout.css'
 
 export default function Layout() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      navigate('table')
+    }
+  }, [location.pathname])
+
   return (
     <>
       <Header />
       <main className="layout">
-        <section>
-          <Table />
-        </section>
+        <Tabs />
       </main>
       <footer></footer>
     </>

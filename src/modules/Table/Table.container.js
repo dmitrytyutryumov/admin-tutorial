@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { getPurchasesState } from '../../store/selectors'
 import * as purchasesActions from '../../store/actions'
 import { TableView } from './Table.view'
@@ -12,7 +12,6 @@ function TableContainer({
   purchases,
   onDrop,
   onSort,
-  loadData,
   updatePurchases,
 }) {
   const ref = useRef()
@@ -20,10 +19,6 @@ function TableContainer({
     ref,
     onLoadMore: updatePurchases,
   })
-
-  useEffect(() => {
-    loadData()
-  }, [])
 
   return (
     <TableView
@@ -54,5 +49,14 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(purchasesActions.addPurchasesSaga())
   },
 })
+
+export const loader =
+  ({ dispatch, state }) =>
+  () => {
+    const data = getPurchasesState(state)
+    return data.purchases.purchases
+      ? data
+      : dispatch(purchasesActions.loadTableDataSaga())
+  }
 
 export default connect(mapStatetoProps, mapDispatchToProps)(TableContainer)

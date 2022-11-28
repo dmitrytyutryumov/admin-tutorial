@@ -9,8 +9,8 @@ export function TableBody({ purchases, columns }) {
 
   return (
     <tbody>
-      {purchases.map((purchase) => (
-        <tr key={purchase.id} onClick={handeClick(purchase.id)}>
+      {purchases.map((purchase, id) => (
+        <tr key={id} onClick={handeClick(purchase.id)}>
           {getTableCell({ columns: columns, purchase: purchase })}
         </tr>
       ))}

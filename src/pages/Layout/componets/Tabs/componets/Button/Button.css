@@ -1,0 +1,16 @@
+.tab-btn {
+  min-width: 5rem;
+  min-height: 2rem;
+
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  border: 2px solid grey;
+
+  font-weight: 500;
+  font-size: 1.3rem;
+  font-family: inherit;
+}
+
+.tab-btn--active {
+  border: 2px solid rgb(76, 76, 180);
+}
