@@ -1,19 +1,15 @@
 import { PurchaseUtils } from '../../../../utils'
+const INPUT_TYPES = {
+  string: 'text',
+  number: 'number',
+  boolean: 'checkbox',
+  array: 'text',
+}
 
 export const getInputType = (value) => {
-  const valueType = typeof value
-  switch (valueType) {
-    case 'string':
-      return 'text'
-    case 'number':
-      return 'number'
-    case 'boolean':
-      return 'checkbox'
-    case 'array':
-      return 'text'
-    default:
-      return valueType
-  }
+  const type = typeof value
+
+  return INPUT_TYPES[type] ?? type
 }
 
 export const getFieldValue = (value) => {

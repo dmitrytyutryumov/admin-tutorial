@@ -45,7 +45,7 @@ export const filterPurchases = ({ purchases, searchQuery, fields }) => {
 export const parseCurrencyField = (str) => parseFloat(str.replace('$', ''))
 
 export const getCurrencyField = (value) => {
-  if (typeof value === 'string' && value.startsWith('$')) {
+  if (`${value}`.startsWith('$')) {
     return [parseCurrencyField(value), true]
   }
   return [value, false]

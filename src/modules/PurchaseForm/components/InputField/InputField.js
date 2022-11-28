@@ -1,5 +1,4 @@
 import { useField } from 'formik'
-import { capitalize } from '../../../../utils'
 import './InputField.css'
 import { getFieldValue, getInputType } from './utils'
 
@@ -14,7 +13,7 @@ export function InputField({ name, ...props }) {
         className={`input-label ${hasError ? 'label-invalid' : ''}`}
         htmlFor={name}
       >
-        {capitalize(`${name}${isCurrencyField ? ' $' : ''}`)}
+        {`${name}${isCurrencyField ? ' $' : ''}`}
       </label>
       <input
         className={`text-input ${hasError ? 'input-invalid' : ''}`}

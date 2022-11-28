@@ -26,7 +26,7 @@ describe('test input field', () => {
     // Act
     render(<InputField data-testid={'test-input'} name="testInput" />)
     const input = screen.getByTestId('test-input')
-    const label = screen.getByText('TestInput')
+    const label = screen.getByText('testInput')
     // Assert
     expect(input.checked).toEqual(true)
     expect(input.classList.contains('input-invalid')).toBe(true)

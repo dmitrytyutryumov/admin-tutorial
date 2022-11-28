@@ -11,7 +11,7 @@ exports[`test purchase form test purchase form 1`] = `
     >
       Purchase Details
     </h1>
-    <div
+    <main
       class="purchase-form__body"
     >
       <div
@@ -21,7 +21,7 @@ exports[`test purchase form test purchase form 1`] = `
           class="input-label "
           for="string"
         >
-          String
+          string
         </label>
         <input
           checked=""
@@ -39,7 +39,7 @@ exports[`test purchase form test purchase form 1`] = `
           class="input-label "
           for="number"
         >
-          Number
+          number
         </label>
         <input
           checked=""
@@ -57,7 +57,7 @@ exports[`test purchase form test purchase form 1`] = `
           class="input-label "
           for="boolean"
         >
-          Boolean
+          boolean
         </label>
         <input
           checked=""
@@ -75,7 +75,7 @@ exports[`test purchase form test purchase form 1`] = `
           class="input-label "
           for="array"
         >
-          Array
+          array
         </label>
         <input
           checked=""
@@ -92,7 +92,7 @@ exports[`test purchase form test purchase form 1`] = `
       >
         Submit
       </button>
-    </div>
+    </main>
   </form>
 </DocumentFragment>
 `;

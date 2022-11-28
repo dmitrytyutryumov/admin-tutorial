@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
+
 import { loader as purchaseLoader } from '../modules/PurchaseForm'
 import ErrorPage from '../pages/ErrorPage/ErrorPage'
 import Layout from '../pages/Layout/Layout'

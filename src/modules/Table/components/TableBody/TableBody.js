@@ -5,13 +5,12 @@ import { getTableCell } from './utils'
 export function TableBody({ purchases, columns }) {
   const navigate = useNavigate()
 
-  const handeClick = (id) => {
-    navigate(`/purchases/${id}`)
-  }
+  const handeClick = (id) => () => navigate(`/purchases/${id}`)
+
   return (
     <tbody>
       {purchases.map((purchase) => (
-        <tr key={purchase.id} onClick={() => handeClick(purchase.id)}>
+        <tr key={purchase.id} onClick={handeClick(purchase.id)}>
           {getTableCell({ columns: columns, purchase: purchase })}
         </tr>
       ))}

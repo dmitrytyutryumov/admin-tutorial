@@ -25,12 +25,12 @@ export function PurchaseForm() {
     <Formik initialValues={{ ...data }} onSubmit={onSubmit}>
       <Form className="purchase-form">
         <h1 className="purchase-form__title">Purchase Details</h1>
-        <div className="purchase-form__body">
+        <main className="purchase-form__body">
           {fields}
           <button className="btn purchase-form__btn" type="submit">
             Submit
           </button>
-        </div>
+        </main>
       </Form>
     </Formik>
   )
