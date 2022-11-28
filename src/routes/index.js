@@ -8,7 +8,7 @@ import { PurchaseDetails } from '../pages/PurchaseDetails'
 
 // children
 import { Table } from '../modules/Table'
-import { LineChart } from '../modules/Charts'
+import { Chart } from '../modules/Charts'
 
 // loaders
 import { loader as purchaseLoader } from '../modules/PurchaseForm'
@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'charts',
-        element: <LineChart />,
+        element: <Chart />,
       },
     ],
   },
