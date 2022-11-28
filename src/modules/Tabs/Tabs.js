@@ -1,4 +1,5 @@
-import { Outlet } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from './componets/Button'
 import './Tabs.css'
 
@@ -14,6 +15,15 @@ const TabNavigation = [
 ]
 
 export function Tabs() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (location.pathname === '/purchases') {
+      navigate('table')
+    }
+  }, [location.pathname])
+
   return (
     <section>
       <ul className="tab-items">
@@ -23,7 +33,9 @@ export function Tabs() {
           </li>
         ))}
       </ul>
-      <Outlet />
+      <div>
+        <Outlet />
+      </div>
     </section>
   )
 }

@@ -2,6 +2,7 @@ import { put, call, all, takeEvery, select } from 'redux-saga/effects'
 import * as purchaseApi from '../api/Purchases'
 import { getColumns } from './selectors'
 import * as purchasesActions from './actions'
+import { authRootSaga } from '../modules/Auth/store'
 
 export function* fetchTableDataSaga() {
   try {
@@ -48,4 +49,6 @@ export default function* rootSaga() {
     takeEvery(purchasesActions.addPurchasesSaga, addPurchases),
     takeEvery(purchasesActions.moveColumnSaga, moveColumn),
   ])
+
+  yield authRootSaga()
 }

@@ -1,16 +1,20 @@
 import { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { getIsUserLoginState } from '../../modules/Auth/store'
 import { Header } from './componets/Header/'
-import { Tabs } from './componets/Tabs'
 import './Layout.css'
 
 export default function Layout() {
+  const isLogin = useSelector(getIsUserLoginState)
   const location = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (location.pathname === '/') {
-      navigate('table')
+    if (isLogin) {
+      if (location.pathname === '/') navigate('purchases')
+    } else {
+      navigate('login')
     }
   }, [location.pathname])
 
@@ -18,7 +22,7 @@ export default function Layout() {
     <>
       <Header />
       <main className="layout">
-        <Tabs />
+        <Outlet />
       </main>
       <footer></footer>
     </>

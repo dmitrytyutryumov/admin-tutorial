@@ -1,7 +1,8 @@
 import { useLoaderData, useNavigate } from 'react-router-dom'
 import { Formik, Form } from 'formik'
+
+import { InputField } from '../../components'
 import { updatePurchase } from '../../api/Purchases'
-import { InputField } from './components/InputField'
 
 import './PurchaseForm.css'
 

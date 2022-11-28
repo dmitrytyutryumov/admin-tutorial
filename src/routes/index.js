@@ -9,6 +9,7 @@ import { PurchaseDetails } from '../pages/PurchaseDetails'
 // children
 import { Table } from '../modules/Table'
 import { Chart } from '../modules/Charts'
+import { Tabs } from '../modules/Tabs'
 
 // loaders
 import { loader as purchaseLoader } from '../modules/PurchaseForm'
@@ -17,32 +18,43 @@ import { loader as tableDataLoader } from '../modules/Table'
 // services
 import '../service'
 import { store } from '../store'
+import Auth from '../modules/Auth/Auth'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
     errorElement: <ErrorPage />,
-    loader: tableDataLoader({
-      dispatch: store.dispatch,
-      state: store.getState(),
-    }),
     children: [
       {
-        path: 'table',
-        element: <Table />,
-        index: true,
+        path: 'login',
+        element: <Auth />,
       },
       {
-        path: 'charts',
-        element: <Chart />,
+        path: 'purchases',
+        element: <Tabs />,
+        children: [
+          {
+            path: 'table',
+            element: <Table />,
+            index: true,
+          },
+          {
+            path: 'charts',
+            element: <Chart />,
+          },
+        ],
+        loader: tableDataLoader({
+          dispatch: store.dispatch,
+          state: store.getState(),
+        }),
+      },
+      {
+        path: 'purchases/:id',
+        element: <PurchaseDetails />,
+        loader: purchaseLoader,
       },
     ],
-  },
-  {
-    path: 'purchases/:id',
-    element: <PurchaseDetails />,
-    loader: purchaseLoader,
   },
   {
     path: '*',

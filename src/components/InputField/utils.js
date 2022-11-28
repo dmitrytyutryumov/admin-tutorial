@@ -1,4 +1,5 @@
-import { PurchaseUtils } from '../../../../utils'
+import { PurchaseUtils } from '../../utils'
+
 const INPUT_TYPES = {
   string: 'text',
   number: 'number',
