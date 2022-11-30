@@ -4,7 +4,10 @@
     "routes": [
       "get-purchases:success",
       "get-purchases-meta:success",
-      "get-purchase:success"
+      "get-purchase:success",
+      "auth-register:success",
+      "auth-login:success",
+      "auth-get-user:success"
     ]
   }
 ]

@@ -1,2 +1,2 @@
-export const getIsUserLoginState = (state) => !state.isLogin
-export const getUser = (state) => state.userData
+export const getIsUserLoginState = ({ auth }) => auth.isLogin
+export const getUser = ({ auth }) => auth.userData

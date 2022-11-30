@@ -19,6 +19,7 @@ import { loader as tableDataLoader } from '../modules/Table'
 import '../service'
 import { store } from '../store'
 import Auth from '../modules/Auth/Auth'
+import { ProtectedComponent } from '../components'
 
 export const router = createBrowserRouter([
   {
@@ -27,12 +28,16 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'login',
+        path: 'auth',
         element: <Auth />,
       },
       {
         path: 'purchases',
-        element: <Tabs />,
+        element: (
+          <ProtectedComponent>
+            <Tabs />
+          </ProtectedComponent>
+        ),
         children: [
           {
             path: 'table',
@@ -51,7 +56,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'purchases/:id',
-        element: <PurchaseDetails />,
+        element: (
+          <ProtectedComponent>
+            <PurchaseDetails />
+          </ProtectedComponent>
+        ),
         loader: purchaseLoader,
       },
     ],

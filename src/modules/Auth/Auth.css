@@ -1,0 +1,39 @@
+.auth-container {
+  display: grid;
+  justify-items: center;
+  align-items: start;
+  gap: 1rem;
+
+  font-family: inherit;
+  font-size: 3rem;
+  line-height: 1.1;
+  color: rgb(76, 76, 180);
+}
+
+.auth-container__tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 0.3rem;
+}
+
+.auth-container__tab {
+  display: flex;
+  justify-content: center;
+
+  padding: 1rem 3rem;
+
+  border-radius: 0.3rem;
+  border: 2px solid grey;
+
+  cursor: pointer;
+
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.auth-container__tab[data-active='true'] {
+  color: grey;
+}

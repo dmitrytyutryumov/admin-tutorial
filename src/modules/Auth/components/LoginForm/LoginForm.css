@@ -1,0 +1,9 @@
+.login-form {
+  display: grid;
+  gap: 1rem;
+  width: clamp(10rem, 10rem + 30vw, 30rem);
+}
+
+.login-form > * > input {
+  width: 100%;
+}

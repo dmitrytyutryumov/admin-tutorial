@@ -1,8 +1,8 @@
 import { createAction } from '@reduxjs/toolkit'
 
-export const request = createAction('request')
-export const success = createAction('success')
-export const failure = createAction('failure')
+export const request = createAction('purchase-request')
+export const success = createAction('purchase-success')
+export const failure = createAction('purchase-failure')
 
 export const sortPurchases = createAction('sort-purchases')
 export const filterPurchases = createAction('filter-purchases')

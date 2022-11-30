@@ -76,8 +76,6 @@ export function BarChart(
         .text(yLabel)
     )
 
-  console.log(data, Y, X)
-
   const bar = svg
     .append('g')
     .attr('fill', color)

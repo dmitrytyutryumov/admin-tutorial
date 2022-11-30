@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import * as purchasesActions from './actions'
+import * as authActions from './actions'
 
 const authSlice = createSlice({
   name: 'auth',
@@ -13,16 +13,24 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(purchasesActions.request, (state) => {
+      .addCase(authActions.request, (state) => {
         state.loading = true
       })
-      .addCase(purchasesActions.success, (state, action) => {
-        state.user = action.payload
-        state.loading = false
-      })
-      .addCase(purchasesActions.failure, (state, action) => {
+      .addCase(
+        authActions.success,
+        (state, { payload: { isLogin, userData } }) => {
+          state.isLogin = isLogin
+          state.userData = userData
+          state.loading = false
+        }
+      )
+      .addCase(authActions.failure, (state, action) => {
         state.loading = false
         state.error = action.payload
+      })
+      .addCase(authActions.logoutAction, (state) => {
+        state.isLogin = false
+        state.userData = {}
       })
   },
 })
