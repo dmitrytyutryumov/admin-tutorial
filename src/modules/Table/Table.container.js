@@ -59,4 +59,7 @@ export const loader =
       : dispatch(purchasesActions.loadTableDataSaga())
   }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(TableContainer)
+export const Table = connect(
+  mapStatetoProps,
+  mapDispatchToProps
+)(TableContainer)

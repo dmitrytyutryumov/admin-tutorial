@@ -24,7 +24,7 @@ export function* loginSaga({ payload }) {
   }
 }
 
-export default function* rootSaga() {
+export function* authRootSaga() {
   yield all([
     takeLatest(authAction.loginAction, loginSaga),
     takeLatest(authAction.registerAction, registerSaga),

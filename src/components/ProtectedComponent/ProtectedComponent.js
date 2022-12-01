@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getIsUserLoginState } from '../../modules/Auth/store'
 
-function ProtectedComponent({ isLogin, children }) {
+function ProtectedComponentView({ isLogin, children }) {
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -13,9 +13,10 @@ function ProtectedComponent({ isLogin, children }) {
   return <>{children}</>
 }
 
-const mapStateProps = (state) => {
-  const isLogin = getIsUserLoginState(state)
-  return { isLogin }
-}
+const mapStatetoProps = (state) => ({
+  isLogin: getIsUserLoginState(state),
+})
 
-export default connect(mapStateProps)(ProtectedComponent)
+export const ProtectedComponent = connect(mapStatetoProps)(
+  ProtectedComponentView
+)

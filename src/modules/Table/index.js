@@ -1,1 +1,1 @@
-export { default as Table, loader } from './Table.container'
+export { Table, loader } from './Table.container'

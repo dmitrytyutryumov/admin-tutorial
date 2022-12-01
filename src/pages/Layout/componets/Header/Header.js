@@ -5,7 +5,7 @@ import { getIsUserLoginState } from '../../../../modules/Auth/store'
 import { logoutAction } from '../../../../modules/Auth/store/actions'
 import './Header.css'
 
-function Header({ logout, isLogin }) {
+function HeaderView({ logout, isLogin }) {
   return (
     <header className="header">
       <h1>
@@ -22,13 +22,12 @@ function Header({ logout, isLogin }) {
   )
 }
 
-const mapStateProps = (state) => {
-  const isLogin = getIsUserLoginState(state)
-  return { isLogin }
-}
+const mapStatetoProps = (state) => ({
+  isLogin: getIsUserLoginState(state),
+})
 
 const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(logoutAction()),
 })
 
-export default connect(mapStateProps, mapDispatchToProps)(Header)
+export const Header = connect(mapStatetoProps, mapDispatchToProps)(HeaderView)

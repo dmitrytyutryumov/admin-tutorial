@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import { authReducer } from '../modules/Auth/store'
 
-import { default as puschasesReducer } from './reducers'
+import puschasesReducer from './reducers'
 import rootSaga from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()

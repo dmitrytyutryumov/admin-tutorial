@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import * as d3 from 'd3'
 
 import { getPurchases } from '../../store/selectors'
@@ -7,37 +6,46 @@ import { BarChart as drawBarChart } from './components/BarChart'
 import { getCurrencyField } from '../../utils/Purchases'
 
 import './Chart.css'
+import { connect } from 'react-redux'
 
-export function Chart() {
-  const purchases = useSelector(getPurchases)
+const WIDTH = 950
+const HEIGHT = 650
+
+const DEFAULT_CHART_OPTIONS = {
+  yFormat: '$',
+  yLabel: '↑ Total Winnings',
+  width: WIDTH,
+  height: HEIGHT,
+  color: 'steelblue',
+}
+
+export function ChartView({ purchases }) {
   const svgRef = useRef(null)
-  const svgWidth = 950
-  const svgHeight = 650
 
   useEffect(() => {
-    if (purchases.length == 0 || svgRef.current === null) {
-      return
-    }
+    if (!purchases.length || !svgRef.current) return
 
     drawBarChart(svgRef.current, purchases, {
-      x: (purchase) => purchase.gameName,
-      y: (purchase) => getCurrencyField(purchase.totalWinnings)[0],
+      x: ({ gameName }) => gameName,
+      y: ({ totalWinnings }) => getCurrencyField(totalWinnings)[0],
       xDomain: d3.groupSort(
         purchases,
-        ([purchase]) => -purchase.totalWinnings,
-        (purchase) => purchase.gameName
+        ([{ totalWinnings }]) => -totalWinnings,
+        ({ gameName }) => gameName
       ), // sort by descending frequency
-      yFormat: '$',
-      yLabel: '↑ Total Winnings',
-      width: svgWidth,
-      height: svgHeight,
-      color: 'steelblue',
+      ...DEFAULT_CHART_OPTIONS,
     })
-  }, [purchases.length])
+  }, [purchases])
 
   return (
     <div className="chart">
-      <svg ref={svgRef} width={svgWidth} height={svgHeight} />
+      <svg ref={svgRef} width={WIDTH} height={HEIGHT} />
     </div>
   )
 }
+
+const MapStatetoProps = (state) => ({
+  purchases: getPurchases(state),
+})
+
+export const Chart = connect(MapStatetoProps)(ChartView)

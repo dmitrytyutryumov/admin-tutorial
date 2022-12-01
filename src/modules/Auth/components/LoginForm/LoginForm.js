@@ -9,7 +9,7 @@ import { loginAction } from '../../store/actions'
 
 import './LoginForm.css'
 
-function LoginForm({ loginHandler, isLogin }) {
+function LoginFormView({ loginHandler, isLogin }) {
   const onSubmit = async (values) => {
     loginHandler(values)
   }
@@ -39,13 +39,15 @@ function LoginForm({ loginHandler, isLogin }) {
   )
 }
 
-const mapStateProps = (state) => {
-  const isLogin = getIsUserLoginState(state)
-  return { isLogin }
-}
+const mapStatetoProps = (state) => ({
+  isLogin: getIsUserLoginState(state),
+})
 
 const mapDispatchToProps = (dispatch) => ({
   loginHandler: (data) => dispatch(loginAction(data)),
 })
 
-export default connect(mapStateProps, mapDispatchToProps)(LoginForm)
+export const LoginForm = connect(
+  mapStatetoProps,
+  mapDispatchToProps
+)(LoginFormView)

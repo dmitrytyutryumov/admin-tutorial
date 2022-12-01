@@ -1,1 +1,1 @@
-export { default as ProtectedComponent } from './ProtectedComponent'
+export { ProtectedComponent } from './ProtectedComponent'
