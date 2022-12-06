@@ -1,6 +1,5 @@
 import { Formik, Form } from 'formik'
 import { connect } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
 import { InputField } from '../../../../components'
 import { loginSagaAction } from '../../store/actions'
@@ -8,11 +7,8 @@ import { loginSagaAction } from '../../store/actions'
 import './LoginForm.css'
 
 function LoginFormView({ loginHandler }) {
-  const navigate = useNavigate()
-
-  const onSubmit = async (values) => {
+  const onSubmit = (values) => {
     loginHandler(values)
-    navigate('/purchases/table')
   }
 
   return (

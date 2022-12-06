@@ -1,12 +1,12 @@
 import { useRef, useEffect } from 'react'
 import * as d3 from 'd3'
+import { connect } from 'react-redux'
 
 import { getPurchases } from '../../store/selectors'
 import { BarChart as drawBarChart } from './components/BarChart'
 import { getCurrencyField } from '../../utils/Purchases'
 
 import './Chart.css'
-import { connect } from 'react-redux'
 
 const WIDTH = 950
 const HEIGHT = 650

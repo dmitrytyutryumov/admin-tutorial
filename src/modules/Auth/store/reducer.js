@@ -4,7 +4,7 @@ import * as authActions from './actions'
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    isLogin: false,
+    isLogin: Boolean(localStorage.getItem('isLogin')),
     userData: {},
 
     loading: false,

@@ -1,5 +1,7 @@
 import { put, call, all, takeLatest } from 'redux-saga/effects'
+
 import * as authAction from './actions'
+
 import * as authAPI from '../../../api/Auth'
 
 export function* registerSaga({ payload }) {
@@ -19,6 +21,7 @@ export function* loginSaga({ payload }) {
     const response = yield call(authAPI.login, payload)
     yield put(authAction.success({ userData: response.data, isLogin: true }))
     localStorage.setItem('isLogin', 1)
+    yield put(redirectSaga())
   } catch (error) {
     yield put(authAction.failure(error.message))
     return error.message
@@ -31,9 +34,6 @@ export function* logout() {
 }
 
 export function* authRootSaga() {
-  yield put(
-    authAction.success({ isLogin: Boolean(localStorage.getItem('isLogin')) })
-  )
   yield all([
     takeLatest(authAction.registerSagaAction, registerSaga),
     takeLatest(authAction.loginSagaAction, loginSaga),

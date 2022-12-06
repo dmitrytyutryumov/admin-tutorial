@@ -3,3 +3,18 @@
   flex-wrap: nowrap;
   gap: 0.3rem;
 }
+
+.tab-items__btn {
+  min-width: 5rem;
+  min-height: 2rem;
+
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  border: 2px solid grey;
+
+  font-weight: 600;
+  font-size: 1.3rem;
+  font-family: inherit;
+  text-transform: capitalize;
+  color: rgb(76, 76, 180);
+}
