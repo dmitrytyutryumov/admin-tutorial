@@ -1,20 +1,19 @@
 import { Formik, Form } from 'formik'
-import React from 'react'
 import { connect } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { InputField } from '../../../../components'
-import { getIsUserLoginState } from '../../store'
-import { loginAction } from '../../store/actions'
+import { loginSagaAction } from '../../store/actions'
 
 import './LoginForm.css'
 
-function LoginFormView({ loginHandler, isLogin }) {
+function LoginFormView({ loginHandler }) {
+  const navigate = useNavigate()
+
   const onSubmit = async (values) => {
     loginHandler(values)
+    navigate('/purchases/table')
   }
-
-  if (isLogin) return <Navigate to="/" replace={true} />
 
   return (
     <Formik initialValues={{ email: '', password: '' }} onSubmit={onSubmit}>
@@ -39,15 +38,8 @@ function LoginFormView({ loginHandler, isLogin }) {
   )
 }
 
-const mapStatetoProps = (state) => ({
-  isLogin: getIsUserLoginState(state),
-})
-
 const mapDispatchToProps = (dispatch) => ({
-  loginHandler: (data) => dispatch(loginAction(data)),
+  loginHandler: (data) => dispatch(loginSagaAction(data)),
 })
 
-export const LoginForm = connect(
-  mapStatetoProps,
-  mapDispatchToProps
-)(LoginFormView)
+export const LoginForm = connect(null, mapDispatchToProps)(LoginFormView)

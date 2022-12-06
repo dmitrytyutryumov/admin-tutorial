@@ -7,6 +7,7 @@ export function* registerSaga({ payload }) {
     yield put(authAction.request())
     const response = yield call(authAPI.register, payload)
     yield put(authAction.success({ userData: response.data, isLogin: true }))
+    localStorage.setItem('isLogin', 1)
   } catch (error) {
     yield put(authAction.failure(error.message))
   }
@@ -17,16 +18,25 @@ export function* loginSaga({ payload }) {
     yield put(authAction.request())
     const response = yield call(authAPI.login, payload)
     yield put(authAction.success({ userData: response.data, isLogin: true }))
-    return isLogin
+    localStorage.setItem('isLogin', 1)
   } catch (error) {
     yield put(authAction.failure(error.message))
     return error.message
   }
 }
 
+export function* logout() {
+  localStorage.removeItem('isLogin')
+  yield put(authAction.logoutAction())
+}
+
 export function* authRootSaga() {
+  yield put(
+    authAction.success({ isLogin: Boolean(localStorage.getItem('isLogin')) })
+  )
   yield all([
-    takeLatest(authAction.loginAction, loginSaga),
-    takeLatest(authAction.registerAction, registerSaga),
+    takeLatest(authAction.registerSagaAction, registerSaga),
+    takeLatest(authAction.loginSagaAction, loginSaga),
+    takeLatest(authAction.logoutSagaAction, logout),
   ])
 }

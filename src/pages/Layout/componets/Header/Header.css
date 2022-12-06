@@ -12,3 +12,15 @@
   background-color: rgb(76, 76, 180);
   max-height: 10vh;
 }
+
+.header__btn {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+
+  background: transparent;
+  background-repeat: no-repeat;
+
+  border: none;
+}

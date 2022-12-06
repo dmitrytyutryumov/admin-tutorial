@@ -5,11 +5,12 @@ import ErrorPage from '../pages/ErrorPage/ErrorPage'
 import Layout from '../pages/Layout/Layout'
 import NotFound from '../pages/NotFound/NotFound'
 import { PurchaseDetails } from '../pages/PurchaseDetails'
+import { Purchases } from '../pages/Purchases'
+import { AuthPage } from '../pages/Auth'
 
 // children
 import { Table } from '../modules/Table'
 import { Chart } from '../modules/Charts'
-import { Tabs } from '../modules/Tabs'
 
 // loaders
 import { loader as purchaseLoader } from '../modules/PurchaseForm'
@@ -18,8 +19,6 @@ import { loader as tableDataLoader } from '../modules/Table'
 // services
 import '../service'
 import { store } from '../store'
-import Auth from '../modules/Auth/Auth'
-import { ProtectedComponent } from '../components'
 
 export const router = createBrowserRouter([
   {
@@ -28,21 +27,12 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'auth',
-        element: <Auth />,
-      },
-      {
         path: 'purchases',
-        element: (
-          <ProtectedComponent>
-            <Tabs />
-          </ProtectedComponent>
-        ),
+        element: <Purchases />,
         children: [
           {
             path: 'table',
             element: <Table />,
-            index: true,
           },
           {
             path: 'charts',
@@ -56,14 +46,14 @@ export const router = createBrowserRouter([
       },
       {
         path: 'purchases/:id',
-        element: (
-          <ProtectedComponent>
-            <PurchaseDetails />
-          </ProtectedComponent>
-        ),
+        element: <PurchaseDetails />,
         loader: purchaseLoader,
       },
     ],
+  },
+  {
+    path: 'auth',
+    element: <AuthPage />,
   },
   {
     path: '*',
